@@ -1,6 +1,7 @@
 image:
   repository: vitobotta/presslabs-backup-notification
-  tag: v1571856561
+  tag: v1571856865
+
 
 slack:
   enabled: true
@@ -21,3 +22,5 @@ email:
 subject_prefix: "[MySQL]"
 
 presslabs_namespace: mysql
+
+service_account: mysql-operator

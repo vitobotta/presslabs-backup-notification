@@ -12,7 +12,7 @@ spec:
       labels:
         app: presslabs-backup-notification
     spec:
-      serviceAccountName: mysql-operator
+      serviceAccountName: {{ .Values.service_account | quote }}
       containers:
         - name: presslabs-backup-notification
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}

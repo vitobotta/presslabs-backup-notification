@@ -23,7 +23,8 @@ helm install ./helm \
   --set email.smtp.password=... \
   --set email.from_address=... \
   --set email.to_address=... \
-  --set email.subject_prefix="[MySQL]"
+  --set subject_prefix="[MySQL]" \
+  --set service_account=mysql-operator
 ```
 
 That's it! You should now receive notifications when a backup is started and when it's completed.
