@@ -20,6 +20,8 @@ spec:
           env:
             - name: PRESSLABS_NAMESPACE
               value: {{ .Values.presslabs_namespace | quote }}
+            - name: SUBJECT_PREFIX
+              value: {{ .Values.subject_prefix | quote }}
             - name: ENABLE_SLACK_NOTIFICATIONS
               value: {{ .Values.slack.enabled | quote }}
             - name: SLACK_USERNAME
@@ -40,8 +42,6 @@ spec:
               value: {{ .Values.email.from_address | quote }}
             - name: EMAIL_TO_ADDRESS
               value: {{ .Values.email.to_address | quote }}
-            - name: EMAIL_SUBJECT_PREFIX
-              value: {{ .Values.email.subject_prefix | quote }}
             - name: EMAIL_SMTP_HOST
               valueFrom:
                 secretKeyRef:

@@ -44,7 +44,7 @@ class Controller
 
     msg = case event.type
     when "ADDED"
-      "MySQL backup #{backup_name} started"
+      "Backup #{backup_name} started"
 
     when "MODIFIED"
       return unless event.resource.status.completed == true
@@ -52,16 +52,18 @@ class Controller
       conditions = event.resource.status.conditions
 
       if conditions.detect { |c| c.type == "Failed" && c.status =~ /true/i }
-        "MySQL backup #{backup_name} FAILED"
+        "Backup #{backup_name} FAILED"
       elsif conditions.detect { |c| c.type == "Complete" && c.status =~ /true/i }
-        "MySQL backup #{backup_name} completed successfully"
+        "Backup #{backup_name} completed successfully"
       else
-        "MySQL backup #{backup_name} completed but status is unknown"
+        "Backup #{backup_name} completed but status is unknown"
       end
 
     else
       return
     end
+
+    msg = "#{ENV.fetch("SUBJECT_PREFIX", "[MySQL]")} #{msg}"
 
 
     logger.info msg
@@ -91,7 +93,7 @@ class Controller
         mail = Mail.new do
           from    ENV["EMAIL_FROM_ADDRESS"]
           to      ENV["EMAIL_TO_ADDRESS"]
-          subject "#{ENV.fetch("EMAIL_SUBJECT_PREFIX", "[MySQL]")} #{msg}"
+          subject msg
           body    "Run `kubectl -n #{presslabs_namespace} get MySQLBackup #{backup_name} -o yaml` for details."
         end
 
