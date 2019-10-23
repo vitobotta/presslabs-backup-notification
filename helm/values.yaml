@@ -1,0 +1,22 @@
+image:
+  repository: vitobotta/presslabs-backup-notification
+  tag: v1571852394
+
+slack:
+  enabled: true
+  webhook: "https://...."
+  channel: "mysql"
+  username: MySQL
+
+email:
+  enabled: true
+  smtp:
+    host: some-smtp-host.com
+    port: 587
+    username: blah
+    password: blah
+  from_address: from@email.com
+  to_address: to@email.com
+  subject_prefix: "[MySQL]"
+
+presslabs_namespace: mysql
